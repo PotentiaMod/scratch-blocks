@@ -100,7 +100,7 @@ Blockly.Toolbox.registerMenu = function(name, options, opt_merge) {
  * This is the sum of the width of the flyout (250) and the category menu (60).
  * @type {number}
  */
-Blockly.Toolbox.prototype.width = 315;
+Blockly.Toolbox.prototype.width = 310;
 
 /**
  * Height of the toolbox, which changes only in horizontal layout.
