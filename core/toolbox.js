@@ -86,6 +86,28 @@ Blockly.Toolbox = function(workspace) {
 };
 
 /**
+ * Object of registered toolbox menus.
+ * @type {Object}
+ * @private
+ */
+Blockly.Toolbox.menus_ = {};
+
+/**
+ * Register a toolbox menu.
+ * @param {string} name The name of the menu.
+ * @param {Object} options The options for the menu.
+ * @param {boolean} optionsMerge Whether to merge the options with existing ones.
+ */
+Blockly.Toolbox.registerMenu = function(name, options, optionsMerge) {
+  if (Blockly.Toolbox.menus_[name] && optionsMerge) {
+    console.warn('registerMenu concats existing options together! if your intent was to override a menu you cant do that via existing functions.');
+    Blockly.Toolbox.menus_[name] = Blockly.Toolbox.menus_[name].concat(options);
+    return;
+  }
+  Blockly.Toolbox.menus_[name] = options;
+};
+
+/**
  * Width of the toolbox, which changes only in vertical layout.
  * This is the sum of the width of the flyout (250) and the category menu (60).
  * @type {number}
