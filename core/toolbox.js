@@ -704,8 +704,8 @@ Blockly.Toolbox.Category = function(parent, parentHtml, domTree) {
   this.setColour(domTree);
   this.custom_ = domTree.getAttribute('custom');
   this.iconURI_ = domTree.getAttribute('iconURI');
-  this.showStatusButton_ = domTree.getAttribute('showStatusButton');
-    var optionsName = domTree.getAttribute('options');
+this.showStatusButton_ = domTree.getAttribute('showStatusButton');
+  var optionsName = domTree.getAttribute('options');
   var options = Blockly.Toolbox.menus_[optionsName];
   if (options) {
     // Wrap all the callbacks so they know who is calling
