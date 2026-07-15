@@ -86,6 +86,7 @@ Blockly.Toolbox = function(workspace) {
 };
 
 Blockly.Toolbox.menus_ = {};
+
 Blockly.Toolbox.registerMenu = function(name, options, opt_merge) {
   if (Blockly.Toolbox.menus_[name] && opt_merge) {
     console.warn('registerMenu concats existing options together! if your intent was to override a menu you cant do that via existing functions.')
