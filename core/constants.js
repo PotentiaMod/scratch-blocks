@@ -271,37 +271,37 @@ Blockly.OUTPUT_SHAPE_PLUS = 5;
  * ENUM for output shape: octagonal (Scratch targets).
  * @const
  */
-Blockly.OUTPUT_OCTAGONAL: 6;
+Blockly.OUTPUT_OCTAGONAL = 6;
 
 /**
  * ENUM for output shape: bumped (BigInt).
  * @const
  */
-Blockly.OUTPUT_BUMPED: 7;
+Blockly.OUTPUT_BUMPED = 7;
 
 /**
  * ENUM for output shape: indented (Symbols).
  * @const
  */
-Blockly.OUTPUT_INDENTED: 8;
+Blockly.OUTPUT_INDENTED = 8;
 
 /**
- * ENUM for output shape: scrapped (Maps).
+ * ENUM for output shape:  scrapped (Maps).
  * @const
  */
-Blockly.OUTPUT_SCRAPPED: 9;
+Blockly.OUTPUT_SCRAPPED = 9;
 
 /**
- * ENUM for output shape: arrow (Sets).
+ * ENUM for output shape:  arrow (Sets).
  * @const
  */
-Blockly.OUTPUT_ARROW: 10;
+Blockly.OUTPUT_ARROW = 10;
 
 /**
  * ENUM for output shape: ticket (Dates).
  * @const
  */
-Blockly.OUTPUT_TICKET: 11;
+Blockly.OUTPUT_TICKET = 11;
 
 
 /**
