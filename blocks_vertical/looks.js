@@ -116,6 +116,84 @@ Blockly.Blocks['looks_think'] = {
   }
 };
 
+Blockly.Blocks["looks_setFont"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline":true,
+      "args0":[
+        {
+          "type":"input_value",
+          "name":"font"
+        },
+        {
+          "type":"input_value",
+          "name":"size"
+        }
+      ],
+      "message0": Blockly.Msg.LOOKS_SETFONT,
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks["looks_setColor"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline":true,
+      "args0":[
+        {
+          "type":"field_dropdown",
+          "name":"prop",
+          "options":[
+            [Blockly.Msg.LOOKS_SETCOLOR_BORDER, "BUBBLE_STROKE"],
+            [Blockly.Msg.LOOKS_SETCOLOR_FILL, "BUBBLE_FILL"],
+            [Blockly.Msg.LOOKS_SETCOLOR_TEXT, "TEXT_FILL"]
+          ]
+        },
+        {
+          "type":"input_value",
+          "name":"color"
+        }
+      ],
+      "message0": Blockly.Msg.LOOKS_SETCOLOR,
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks["looks_setShape"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline":true,
+      "args0":[
+        {
+          "type":"field_dropdown",
+          "name":"prop",
+          "options":[
+            [Blockly.Msg.LOOKS_SETSHAPE_MINIMUMWIDTH, "MIN_WIDTH"],
+            [Blockly.Msg.LOOKS_SETSHAPE_MAXIMUMWIDTH, "MAX_LINE_WIDTH"],
+            ["border line width", "STROKE_WIDTH"],
+            ["padding size", "PADDING"],
+            ["corner radius", "CORNER_RADIUS"],
+            ["tail height", "TAIL_HEIGHT"],
+            ["font pading percent", "FONT_HEIGHT_RATIO"],
+            ["text length limit", "texlim"]
+          ]
+        },
+        {
+          "type":"input_value",
+          "name":"color"
+        }
+      ],
+      "message0": Blockly.Msg.LOOKS_SETSHAPE,
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['looks_show'] = {
   /**
    * Show block.
@@ -144,6 +222,99 @@ Blockly.Blocks['looks_hide'] = {
   }
 };
 
+Blockly.Blocks['looks_changeVisibilityOfSprite_menu'] = {
+  /**
+   * pm: changeVisibilityOfSprite drop-down menu.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "VISIBLE_OPTION",
+          "options": [
+            ["myself", '_myself_']
+          ]
+        }
+      ],
+      "extensions": ["colours_looks", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_changeVisibilityOfSprite'] = {
+  /**
+   * pm: changeVisibilityOfSprite block.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "%1 %2",
+      "inputsInline": true,
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "VISIBLE_TYPE",
+          "options": [
+            ["show", "show"],
+            ["hide", "hide"]
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "VISIBLE_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_changeVisibilityOfSpriteShow'] = {
+  /**
+   * pm: changeVisibilityOfSprite block.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "show %1",
+      "inputsInline": true,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VISIBLE_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_changeVisibilityOfSpriteHide'] = {
+  /**
+   * pm: changeVisibilityOfSprite block.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "hide %1",
+      "inputsInline": true,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VISIBLE_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['looks_hideallsprites'] = {
   /**
    * Hide-all-sprites block. Does not actually do anything. This is an
@@ -156,6 +327,80 @@ Blockly.Blocks['looks_hideallsprites'] = {
       "message0": Blockly.Msg.LOOKS_HIDEALLSPRITES,
       "category": Blockly.Categories.looks,
       "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_showallsprites'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.LOOKS_SHOWALLSPRITES,
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+Blockly.Blocks["looks_getAllSpritesVisible"] = {
+  /**
+   * This block is orginally added to Dinosaurmod,
+   * so I decided to port this one into PotentiaMod, too.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": Blockly.Msg.LOOKS_GETALLSPRITESVISIBLE,
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "VISIBLE_TYPE",
+          "options": [
+            [Blockly.Msg.LOOKS_GETALLSPRITESVISIBLE_VISIBLE, "show"],
+            [Blockly.Msg.LOOKS_GETALLSPRITESVISIBLE_INVISIBLE, "hide"]
+          ]
+        }
+      ],
+      "extensions": [
+        "output_boolean",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_setTintColor"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "args0":[
+        {
+          "type":"input_value",
+          "name":"color"
+        }
+      ],
+      "message0": Blockly.Msg.LOOKS_SETTINTCOLOR,
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+Blockly.Blocks['looks_tintColor'] = {
+  /**
+   * pm: Block to report the tint color effect in hex code
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": Blockly.Msg.LOOKS_TINTCOLOR,
+      "category": Blockly.Categories.looks,
+      "checkboxInFlyout": true,
+      "extensions": ["colours_looks", "output_string"]
     });
   }
 };
@@ -179,7 +424,17 @@ Blockly.Blocks['looks_changeeffectby'] = {
             [Blockly.Msg.LOOKS_EFFECT_PIXELATE, 'PIXELATE'],
             [Blockly.Msg.LOOKS_EFFECT_MOSAIC, 'MOSAIC'],
             [Blockly.Msg.LOOKS_EFFECT_BRIGHTNESS, 'BRIGHTNESS'],
-            [Blockly.Msg.LOOKS_EFFECT_GHOST, 'GHOST']
+            [Blockly.Msg.LOOKS_EFFECT_GHOST, 'GHOST'],
+			[Blockly.Msg.COLOUR_SATURATION_LABEL, 'SATURATION'],
+            [Blockly.Msg.LOOKS_EFFECT_RED, 'RED'],
+            [Blockly.Msg.LOOKS_EFFECT_GREEN, 'GREEN'],
+            [Blockly.Msg.LOOKS_EFFECT_BLUE, 'BLUE'],
+            [Blockly.Msg.LOOKS_EFFECT_OPAQUE, 'OPAQUE'],
+            ['horizontal shear', 'HORIZONTAL_SHEAR'],
+            ['vertical shear', 'VERTICAL_SHEAR'],
+            ["repeat X", 'REPEAT_X'],
+            ["repeat Y", 'REPEAT_Y'],
+            //['blur', 'BLUR']
           ]
         },
         {
@@ -212,7 +467,17 @@ Blockly.Blocks['looks_seteffectto'] = {
             [Blockly.Msg.LOOKS_EFFECT_PIXELATE, 'PIXELATE'],
             [Blockly.Msg.LOOKS_EFFECT_MOSAIC, 'MOSAIC'],
             [Blockly.Msg.LOOKS_EFFECT_BRIGHTNESS, 'BRIGHTNESS'],
-            [Blockly.Msg.LOOKS_EFFECT_GHOST, 'GHOST']
+            [Blockly.Msg.LOOKS_EFFECT_GHOST, 'GHOST'],
+            [Blockly.Msg.COLOUR_SATURATION_LABEL, 'SATURATION'],
+            [Blockly.Msg.LOOKS_EFFECT_RED, 'RED'],
+            [Blockly.Msg.LOOKS_EFFECT_GREEN, 'GREEN'],
+            [Blockly.Msg.LOOKS_EFFECT_BLUE, 'BLUE'],
+            [Blockly.Msg.LOOKS_EFFECT_OPAQUE, 'OPAQUE'],
+            ['horizontal shear', 'HORIZONTAL_SHEAR'],
+            ['vertical shear', 'VERTICAL_SHEAR'],
+            ["repeat X", 'REPEAT_X'],
+            ["repeat Y", 'REPEAT_Y'],
+            //['blur', 'BLUR']
           ]
         },
         {
@@ -427,6 +692,40 @@ Blockly.Blocks['looks_switchbackdropto'] = {
   }
 };
 
+Blockly.Blocks['looks_previouscostume'] = {
+  /**
+   * pm: Block to switch the sprite's costume to the previous one.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.LOOKS_PREVIOUSCOSTUME,
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_switchbackdropto'] = {
+  /**
+   * Block to switch the backdrop to the selected one.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.LOOKS_SWITCHBACKDROPTO,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "BACKDROP"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['looks_backdrops'] = {
   /**
    * Backdrop list
@@ -502,6 +801,102 @@ Blockly.Blocks['looks_goforwardbackwardlayers'] = {
       ],
       "category": Blockly.Categories.looks,
       "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_goTargetLayer'] = {
+  /**
+   * "Go infront/behind [sprite]" Block.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.LOOKS_GOTARGETLAYER,
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "FORWARD_BACKWARD",
+          "options": [
+            [Blockly.Msg.LOOKS_GOTARGETLAYER_INFRONT, 'infront'],
+            [Blockly.Msg.LOOKS_GOTARGETLAYER_BEHIND, 'behind']
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "VISIBLE_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks["looks_layersSetLayer"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": Blockly.Msg.LOOKS_LAYERSSETLAYER,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "NUM"
+        }
+      ],
+      "extensions": [
+        "shape_statement",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_layersGetLayer"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": Blockly.Msg.LOOKS_LAYERSGETLAYER,
+      "checkboxInFlyout": true,
+      "extensions": [
+        "output_number",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks['looks_getcostumelength'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "# of costumes",
+      "args0": [],
+      "category": Blockly.Categories.looks,
+      "checkboxInFlyout": true,
+      "extensions": ["colours_looks", "output_number"]
+    });
+  }
+};
+Blockly.Blocks['looks_getbackdroplength'] = {
+  /**
+   * dinosaurmod: a block that could be added to dinosaurmod.
+   * this is NOT compatible with PenguinMod.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "# of backdrops",
+      "args0": [],
+      "category": Blockly.Categories.looks,
+      "checkboxInFlyout": true,
+      "extensions": ["colours_looks", "output_number"]
     });
   }
 };
@@ -586,6 +981,418 @@ Blockly.Blocks['looks_nextbackdrop'] = {
       "message0": Blockly.Msg.LOOKS_NEXTBACKDROP_BLOCK,
       "category": Blockly.Categories.looks,
       "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+  
+  
+Blockly.Blocks['looks_previousbackdrop'] = {
+  /**
+   * pm: Block to switch the backdrop to the previous one.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.LOOKS_PREVIOUSBACKDROP_BLOCK,
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks["looks_setStretch"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "X"
+        },
+        {
+          "type": "input_value",
+          "name": "Y"
+        }
+      ],
+      "message0": Blockly.Msg.LOOKS_SETSTRETCH,
+      "extensions": [
+        "shape_statement",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_changeStretch"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "X"
+        },
+        {
+          "type": "input_value",
+          "name": "Y"
+        }
+      ],
+      "message0": Blockly.Msg.LOOKS_CHANGESTRETCH,
+      "extensions": [
+        "shape_statement",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_stretchGetX"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "checkboxInFlyout": true,
+      "category": "looks",
+      "message0": Blockly.Msg.LOOKS_STRETCHGETX,
+      "extensions": [
+        "output_number",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_stretchGetY"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "checkboxInFlyout": true,
+      "category": "looks",
+      "message0": Blockly.Msg.LOOKS_STRETCHGETY,
+      "extensions": [
+        "output_number",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_getSpriteVisible"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": Blockly.Msg.LOOKS_GETSPRITEVISIBLE,
+      "checkboxInFlyout": true,
+      "extensions": [
+        "output_boolean",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks['looks_getOtherSpriteVisible_menu'] = {
+  /**
+   * pm: Sprite-visible drop-down menu.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "VISIBLE_OPTION",
+          "options": [
+            ["myself", '_myself_']
+          ]
+        }
+      ],
+      "extensions": ["colours_looks", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks["looks_getOtherSpriteVisible"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": "is %1 visible?",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VISIBLE_OPTION"
+        }
+      ],
+      "extensions": [
+        "output_boolean",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_getEffectValue"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": Blockly.Msg.LOOKS_GETEFFECTVALUE,
+      "checkboxInFlyout": true,
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "EFFECT",
+          "options": [
+            [Blockly.Msg.LOOKS_EFFECT_COLOR, 'COLOR'],
+            [Blockly.Msg.LOOKS_EFFECT_FISHEYE, 'FISHEYE'],
+            [Blockly.Msg.LOOKS_EFFECT_WHIRL, 'WHIRL'],
+            [Blockly.Msg.LOOKS_EFFECT_PIXELATE, 'PIXELATE'],
+            [Blockly.Msg.LOOKS_EFFECT_MOSAIC, 'MOSAIC'],
+            [Blockly.Msg.LOOKS_EFFECT_BRIGHTNESS, 'BRIGHTNESS'],
+            [Blockly.Msg.LOOKS_EFFECT_GHOST, 'GHOST'],
+            [Blockly.Msg.COLOUR_SATURATION_LABEL, 'SATURATION'],
+            [Blockly.Msg.LOOKS_EFFECT_RED, 'RED'],
+            [Blockly.Msg.LOOKS_EFFECT_GREEN, 'GREEN'],
+            [Blockly.Msg.LOOKS_EFFECT_BLUE, 'BLUE'],
+            [Blockly.Msg.LOOKS_EFFECT_OPAQUE, 'OPAQUE'],
+            ['horizontal shear', 'HORIZONTAL_SHEAR'],
+            ['vertical shear', 'VERTICAL_SHEAR'],
+            ["repeat X", 'REPEAT_X'],
+            ["repeat Y", 'REPEAT_Y'],
+            //['blur', 'BLUR']
+          ]
+        }
+      ],
+      "extensions": [
+        "output_number",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_sayHeight"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": Blockly.Msg.LOOKS_SAYHEIGHT,
+      "checkboxInFlyout": true,
+      "extensions": [
+        "output_number",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_sayWidth"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": Blockly.Msg.LOOKS_SAYWIDTH,
+      "checkboxInFlyout": true,
+      "extensions": [
+        "output_number",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_sayColor"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": "bubble %1 color",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "prop",
+          "options": [
+            ["border","BUBBLE_STROKE"],
+            ["fill","BUBBLE_FILL"],
+            ["text","TEXT_FILL"]
+          ]
+        }
+      ],
+      "extensions": [
+        "output_string",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_sayOther"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": "bubble %1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "prop",
+          "options": [
+            ["minimum width","MIN_WIDTH"],
+            ["maximum width","MAX_LINE_WIDTH"],
+            ["border line width","STROKE_WIDTH"],
+            ["padding size","PADDING"],
+            ["corner radius","CORNER_RADIUS"],
+            ["tail height","TAIL_HEIGHT"],
+            ["font pading percent","FONT_HEIGHT_RATIO"],
+            ["text length limit","texlim"]
+          ]
+        }
+      ],
+      "extensions": [
+        "output_number",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks['looks_stoptalking'] = {
+  /**
+   * pm: Block to stop talking/thinking.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": Blockly.Msg.LOOKS_STOPTALKING,
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_getinputofcostume'] = {
+  /**
+   * pm: Block to report an attribute on a costume
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.OPERATORS_MATHOP,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "INPUT"
+        },
+        {
+          "type": "input_value",
+          "name": "COSTUME"
+        },
+      ],
+      "category": Blockly.Categories.looks,
+      "inputsInline": true,
+      "extensions": ["colours_looks", "output_number"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_getinput_menu'] = {
+  /**
+   * pm: List of options for the first input of looks_getinputofcostume.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "INPUT",
+          "options": [
+            [Blockly.Msg.LOOKS_GETINPUT_MENU_WIDTH, 'width'],
+            [Blockly.Msg.LOOKS_GETINPUT_MENU_HEIGHT, 'height'],
+            ['rotation center x', 'rotation center x'],
+            ['rotation center y', 'rotation center y'],
+            [Blockly.Msg.LOOKS_GETINPUT_MENU_DRAWINGMODE, 'drawing mode']
+          ]
+        }
+      ],
+      "extensions": ["colours_looks", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_screamforsecs'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": "scream %1 for %2 seconds",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "MESSAGE"
+        },
+        {
+          "type": "input_value",
+          "name": "SECS"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_scream'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": "scream %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "MESSAGE"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_getWhatBubbleIsDisplaying'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": Blockly.Msg.LOOKS_GETWHATBUBBLEISDISPLAYING,
+      "args0": [],
+      "extensions": ["colours_looks", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_getinputofbackdrop'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%1 of backdrop %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "INPUT"
+        },
+        {
+          "type": "input_value",
+          "name": "COSTUME"
+        },
+      ],
+      "category": Blockly.Categories.looks,
+      "inputsInline": true,
+      "extensions": ["colours_looks", "output_number"]
     });
   }
 };
