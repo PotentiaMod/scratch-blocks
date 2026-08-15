@@ -1831,71 +1831,67 @@ Blockly.BlockSvg.getInputShapeInfo_ = function(shape) {
   var inputShapeArgType = null;
   var inputShapeWidth = 0;
 
-  switch (shape) {
-    case Blockly.OUTPUT_SHAPE_HEXAGONAL:
-      inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_HEXAGONAL;
-      inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_HEXAGONAL_WIDTH;
-      inputShapeArgType = 'boolean';
-      break;
-    case Blockly.OUTPUT_SHAPE_ROUND:
-      inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_ROUND;
-      inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_ROUND_WIDTH;
-      inputShapeArgType = 'round';
-      break;
-    case Blockly.OUTPUT_SHAPE_SQUARE:
-    default:  // If the input connection is not connected, draw a hole shape.
-      inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_SQUARE;
-      inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_SQUARE_WIDTH;
-      inputShapeArgType = 'square';
-      break;
-    case Blockly.OUTPUT_SHAPE_LEAF:
-    default:
-      inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_LEAF;
-      inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_LEAF_WIDTH;
-      inputShapeArgType = 'leaf';
-      break;
-    case Blockly.OUTPUT_SHAPE_PLUS:
-    default:
-      inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_PLUS;
-      inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_PLUS_WIDTH;
-      inputShapeArgType = 'plus';
-      break;
-    case Blockly.OUTPUT_SHAPE_OCTAGONAL:
-    default:
-      inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_OCTAGONAL;
-      inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_OCTAGONAL_WIDTH;
-      inputShapeArgType = 'octagon';
-      break;
-    case Blockly.OUTPUT_SHAPE_BUMPED:
-    default:
-      inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_BUMPED;
-      inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_BUMPED_WIDTH;
-      inputShapeArgType = 'bumped';
-      break;
-    case Blockly.OUTPUT_SHAPE_INDENTED:
-    default:
-      inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_INDENTED;
-      inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_INDENTED_WIDTH;
-      inputShapeArgType = 'indented';
-      break;
-    case Blockly.OUTPUT_SHAPE_SCRAPPED:
-    default:
-      inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_SCRAPPED;
-      inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_SCRAPPED_WIDTH;
-      inputShapeArgType = 'scrapped';
-      break;
-    case Blockly.OUTPUT_SHAPE_ARROW:
-    default:
-      inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_ARROW;
-      inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_ARROW_WIDTH;
-      inputShapeArgType = 'arrow';
-      break;
-    case Blockly.OUTPUT_SHAPE_TICKET:
-    default:
-      inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_TICKET;
-      inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_TICKET_WIDTH;
-      inputShapeArgType = 'ticket';
-      break;
+switch (shape) {
+  case Blockly.OUTPUT_SHAPE_HEXAGONAL:
+    inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_HEXAGONAL;
+    inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_HEXAGONAL_WIDTH;
+    inputShapeArgType = 'boolean';
+    break;
+  case Blockly.OUTPUT_SHAPE_ROUND:
+    inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_ROUND;
+    inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_ROUND_WIDTH;
+    inputShapeArgType = 'round';
+    break;
+  case Blockly.OUTPUT_SHAPE_SQUARE:
+    inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_SQUARE;
+    inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_SQUARE_WIDTH;
+    inputShapeArgType = 'square';
+    break;
+  case Blockly.OUTPUT_SHAPE_LEAF:
+    inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_LEAF;
+    inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_LEAF_WIDTH;
+    inputShapeArgType = 'leaf';
+    break;
+  case Blockly.OUTPUT_SHAPE_PLUS:
+    inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_PLUS;
+    inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_PLUS_WIDTH;
+    inputShapeArgType = 'plus';
+    break;
+  case Blockly.OUTPUT_SHAPE_OCTAGONAL:
+    inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_OCTAGONAL;
+    inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_OCTAGONAL_WIDTH;
+    inputShapeArgType = 'octagon';
+    break;
+  case Blockly.OUTPUT_SHAPE_BUMPED:
+    inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_BUMPED;
+    inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_BUMPED_WIDTH;
+    inputShapeArgType = 'bumped';
+    break;
+  case Blockly.OUTPUT_SHAPE_INDENTED:
+    inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_INDENTED;
+    inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_INDENTED_WIDTH;
+    inputShapeArgType = 'indented';
+    break;
+  case Blockly.OUTPUT_SHAPE_SCRAPPED:
+    inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_SCRAPPED;
+    inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_SCRAPPED_WIDTH;
+    inputShapeArgType = 'scrapped';
+    break;
+  case Blockly.OUTPUT_SHAPE_ARROW:
+    inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_ARROW;
+    inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_ARROW_WIDTH;
+    inputShapeArgType = 'arrow';
+    break;
+  case Blockly.OUTPUT_SHAPE_TICKET:
+    inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_TICKET;
+    inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_TICKET_WIDTH;
+    inputShapeArgType = 'ticket';
+    break;
+  default:
+    // Fallback to square if shape is not recognized
+    inputShapePath = Blockly.BlockSvg.INPUT_SHAPE_SQUARE;
+    inputShapeWidth = Blockly.BlockSvg.INPUT_SHAPE_SQUARE_WIDTH;
+    inputShapeArgType = 'square';
   }
   return {
     path: inputShapePath,
