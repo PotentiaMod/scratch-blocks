@@ -290,6 +290,46 @@ Blockly.Blocks['sensing_mousedown'] = {
   }
 };
 
+Blockly.Blocks['sensing_fingerdown'] = {
+  /**
+   * pm: Block to Report if the specified finger is down.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "finger %1 down?",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "FINGER_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_fingertapped'] = {
+  /**
+   * pm: Block to Report if the specified finger has tapped on this frame.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "finger %1 tapped?",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "FINGER_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
+    });
+  }
+};
+
 Blockly.Blocks['sensing_mousex'] = {
   /**
    * Block to report mouse's x position
@@ -316,6 +356,89 @@ Blockly.Blocks['sensing_mousey'] = {
       "category": Blockly.Categories.sensing,
       "checkboxInFlyout": true,
       "extensions": ["colours_sensing", "output_number"]
+    });
+  }
+};
+
+Blockly.Blocks["sensing_mobile"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "mobile?",
+      "args0": [],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_fingerx'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "finger %1 x",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "FINGER_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_number"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_fingery'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "finger %1 y",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "FINGER_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_number"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_setclipboard'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "add %1 to clipboard",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "ITEM"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_getclipboard'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "clipboard item",
+      "category": Blockly.Categories.sensing,
+      "checkboxInFlyout": true,
+      "extensions": ["colours_sensing", "output_string"]
     });
   }
 };
