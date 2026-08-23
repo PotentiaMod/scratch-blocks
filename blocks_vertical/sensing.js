@@ -292,7 +292,6 @@ Blockly.Blocks['sensing_mousedown'] = {
 
 Blockly.Blocks['sensing_fingerdown'] = {
   /**
-   * pm: Block to Report if the specified finger is down.
    * @this Blockly.Block
    */
   init: function() {
