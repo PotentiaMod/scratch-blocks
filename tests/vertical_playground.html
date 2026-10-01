@@ -70,16 +70,6 @@
         Blockly.ScratchMsgs.setLocale(locale);
         document.forms.options.elements.locale.value = locale;
 
-        Blockly.Toolbox.registerMenu('extensionControls', [
-          {
-            text: 'Remove Extension',
-            enabled: true,
-            callback: function() {
-              alert('Remove Extension clicked');
-            }
-          }
-        ])
-
         // Create main workspace.
         workspace = Blockly.inject('blocklyDiv', {
           comments: true,
