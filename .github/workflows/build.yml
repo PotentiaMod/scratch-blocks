@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - develop
 
 permissions:
   contents: write
@@ -68,10 +68,10 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4.0.0
           
-      - name: Checkout to main-builds
+      - name: Checkout to develop-builds
         uses: actions/checkout@v6-beta
         with:
-          ref: main-builds
+          ref: develop-builds
       
       - name: Clear out things
         run: |
