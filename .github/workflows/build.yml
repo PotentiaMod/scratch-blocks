@@ -1,7 +1,6 @@
 name: Rebuild
 on:
   workflow_dispatch:
-  push:
     branches:
       - develop
 
