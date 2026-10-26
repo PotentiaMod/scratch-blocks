@@ -1,13 +1,8 @@
-name: Build and Deploy
+name: Build and publish to develop-builds
 
 on:
   push:
-  pull_request:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    branches: [develop]
 
 jobs:
   build:
@@ -15,32 +10,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          ref: develop
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
 
       - run: npm ci --legacy-peer-deps
+      - run: npm run prepublish
 
-      - name: Build site
-        run: npm run build
+      - name: Create deploy branch
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist   # change to your build output folder, e.g. ./build or ./public
+          if git ls-remote --exit-code --heads origin develop-builds >/dev/null 2>&1; then
+            git checkout develop-builds
+            git pull origin develop-builds
+          else
+            git checkout --orphan develop-builds
+          fi
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          git rm -rf . || true
+          cp -R dist/. .
+          git add -A
+          git commit -m "Deploy build: ${GITHUB_SHA::7}" || echo "No changes"
+          git push origin develop-builds --force
