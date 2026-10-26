@@ -1,19 +1,133 @@
-name: Build
+name: Build and Push
 
 on:
   push:
-  pull_request:
+    branches:
+      - develop
+  workflow_dispatch:
+    inputs: {}
+
+permissions:
+  actions: read
+  contents: write
+  pages: write
+  id-token: write
+  pull-requests: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
-      with:
-        persist-credentials: false
-    - name: Install Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22
-        cache: npm
-    - run: npm ci --legacy-peer-deps
+      - name: Checkout Code
+        uses: actions/checkout@v7
+        with:
+          ref: develop
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+
+      - name: Set up Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: "temurin"
+          java-version: "17"
+          java-package: "jre"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run prepublish
+
+      - name: Update Translations
+        run: npm run translate
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: gh-pages
+
+      - name: Upload package build artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: develop-builds
+          path: |
+            dist
+            media
+            msg
+            blockly_compressed.js
+            blocks_compressed.js
+            blockly_uncompressed.js
+            package.json
+            npm-lock.yaml
+          retention-days: 1
+
+  publish-build:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout build branch
+        uses: actions/checkout@v7
+        with:
+          ref: develop-builds
+
+      - name: Download package build artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: develop-builds
+          path: ${{ runner.temp }}/build-output
+
+      - name: Commit and push build
+        run: |
+          git config --local user.name "GitHub Action"
+          git config --local user.email "action@github.com"
+
+          find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
+          cp -r "$RUNNER_TEMP/build-output/." .
+
+          git add --all
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Build: ${GITHUB_SHA::7}"
+
+            for attempt in 1 2 3; do
+              if git push origin develop-builds; then
+                break
+              fi
+
+              if [ "$attempt" -eq 3 ]; then
+                exit 1
+              fi
+
+              sleep $((attempt * 5))
+            done
+          fi
+
+  deploy-pages:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+  notify:
+    needs: [publish-build, deploy-pages]
+    uses: ./.github/workflows/notify-dependents.yml
+    secrets: inherit
