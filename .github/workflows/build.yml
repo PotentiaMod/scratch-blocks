@@ -1,39 +1,19 @@
-name: Build and publish to develop-builds
+name: Build
 
 on:
   push:
-    branches: [develop]
+  pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: develop
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
-      - run: npm ci --legacy-peer-deps
-      - run: npm run prepublish
-
-      - name: Create deploy branch
-        run: |
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
-
-          if git ls-remote --exit-code --heads origin develop-builds >/dev/null 2>&1; then
-            git checkout develop-builds
-            git pull origin develop-builds
-          else
-            git checkout --orphan develop-builds
-          fi
-
-          git rm -rf . || true
-          cp -R dist/. .
-          git add -A
-          git commit -m "Deploy build: ${GITHUB_SHA::7}" || echo "No changes"
-          git push origin develop-builds --force
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: npm
+    - run: npm ci --legacy-peer-deps
