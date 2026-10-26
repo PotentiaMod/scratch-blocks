@@ -46,6 +46,9 @@ jobs:
         run: npm ci
 
       - name: Build
+        run: npm run prepublish
+        
+        - name: Translate
         run: npm run translate
 
       - name: Setup Pages
