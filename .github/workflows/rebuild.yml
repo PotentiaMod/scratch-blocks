@@ -19,6 +19,8 @@ jobs:
   rebuild:
     concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
     runs-on: ubuntu-22.04
+    environment:
+      name: github-pages
     steps:
       - uses: actions/setup-node@v3
         with:
