@@ -3,7 +3,8 @@ name: Rebuild
 on:
   workflow_dispatch:
   push:
-    branches: [develop]
+    branches:
+      - develop
   pull_request:
 
 permissions:
@@ -16,13 +17,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  rebuild:
     runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request'
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,45 +43,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build site
+      - name: Build
         run: npm run translate
 
-      - name: Configure Pages
+      - name: Setup Pages
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/develop'
         uses: actions/configure-pages@v5
 
-      - name: Upload Pages artifact
+      - name: Upload artifact
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/develop'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 
       - name: Deploy to GitHub Pages
-        id: deploy
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/develop'
         uses: actions/deploy-pages@v4
-        
-   mirror-build:
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/develop'
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout develop-builds
-        uses: actions/checkout@v4
-        with:
-          ref: develop-builds
-
-      - name: Replace built output
-        run: |
-          rm -rf dist media
-          mkdir -p dist media
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: built-dist
-          path: dist/
-
-      - name: Commit build branch
-        uses: EndBug/add-and-commit@v9
-        with:
-          message: "Deploy build from develop"
-        
-        
