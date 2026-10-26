@@ -18,9 +18,9 @@ concurrency:
 
 jobs:
   rebuild:
-    environment:
-      name: github-pages
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,22 +45,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Run prepublish
         run: npm run prepublish
-        
-        - name: Translate
+
+      - name: Build site
         run: npm run translate
 
-      - name: Setup Pages
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/develop'
+      - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload artifact
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/develop'
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 
       - name: Deploy to GitHub Pages
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/develop'
+        id: deployment
         uses: actions/deploy-pages@v4
